@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Refresh page every 60 seconds-->
+
+    <meta http-equiv="refresh" content="60">
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <!-- Count of Login events -->
+
+    <!-- Count of events -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'MGGaxMzZWxFZYOaqJqZb';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Count');
+          //data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.count),
+              //parseFloat(row.success)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#Logincount').get(0));
+
+          chart.draw(data, {
+            title: 'Login Events Count'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+    <!-- Success of events -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'MGGaxMzZWxFZYOaqJqZb';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.success),
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#Loginsuccess').get(0));
+
+          chart.draw(data, {
+            title: 'Login Events Success'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+    <!-- Count of Apex events -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'KJJlnmW36NC2W5DR1bvA';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Count');
+          //data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.count),
+              //parseFloat(row.success)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#Apexcount').get(0));
+
+          chart.draw(data, {
+            title: 'Apex Limit Event Count'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+    <!-- Success of events -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'KJJlnmW36NC2W5DR1bvA';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.success),
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#Apexsuccess').get(0));
+
+          chart.draw(data, {
+            title: 'Apex Limit Event Success'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+    <!-- Apex Limit Event Query Timings -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'wpp6OrgLGzCbgpl0AlWd';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'AvgLimitValue');
+          data.addColumn('number', 'Count');
+          data.addColumn('number', 'CountId');
+          data.addColumn('number', 'EntryPointId_');
+          data.addColumn('number', 'EntryPointName');
+          data.addColumn('number', 'EntryPointType_');
+          data.addColumn('number', 'EventTime_');
+          data.addColumn('number', 'GroupByAdv');
+          data.addColumn('number', 'GroupBySimple');
+          data.addColumn('number', 'LimitType');
+          data.addColumn('number', 'MaxLimitValue');
+          data.addColumn('number', 'MinLimitValue');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_LAST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_LAST');
+          data.addColumn('number', 'UserId_');
+          data.addColumn('number', 'Username');
+          
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.AvgLimitValue),
+              parseFloat(row.Count),
+              parseFloat(row.CountId),
+              parseFloat(row.EntryPointId_),
+              parseFloat(row.EntryPointName),
+              parseFloat(row.EntryPointType_),
+              parseFloat(row.EventTime_),
+              parseFloat(row.GroupByAdv),
+              parseFloat(row.GroupBySimple),
+              parseFloat(row.LimitType),
+              parseFloat(row.MaxLimitValue),
+              parseFloat(row.MinLimitValue),
+              parseFloat(row.OrderBy_ASC_NULLS_FIRST),
+              parseFloat(row.OrderBy_ASC_NULLS_LAST),
+              parseFloat(row.OrderBy_DESC_NULLS_FIRST),
+              parseFloat(row.OrderBy_DESC_NULLS_LAST),
+              parseFloat(row.UserId_),
+              parseFloat(row.Username)
+            
+            ]);
+          });
+
+          var options = {
+            'legend':'bottom',
+            'title':'Apex Limit Event Query Result Timings (in seconds)',
+            'is3D':true,
+            'width':'100%',
+            'height':300,
+            'pointSize': 5,
+            'fontSize': 10
+          }
+
+          var chart = new google.visualization.LineChart($('#Apexquery').get(0));
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+
+
+  </head>
+  <body>
+    <h1>Apex Limits Event Heartbeat Dashboard (Dev Environment)</h1>
+    <div id="Apexcount" style="width: 100%;"></div><br/>
+    <div id="Apexquery" style="width: 100%;"></div><br/>
+    <div id="Apexsuccess" style="width: 100%;"></div><br/>
+
+    <h1>Login Events Heartbeat Dashboard (Production Environment)</h1>
+    <div id="Logincount" style="width: 100%;"></div><br/>
+    <div id="Loginsuccess" style="width: 100%;"></div><br/>
+
+  </body>
+</html>
