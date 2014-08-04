@@ -297,6 +297,79 @@
     </script>
 
 
+<!-- Login Event (IdForensics) Query Timings -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'lzzYVwZN54TNmpyZVLL7';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'CountId');
+          data.addColumn('number', 'EventTime');
+          data.addColumn('number', 'GroupByAdv');
+          data.addColumn('number', 'GroupBySimple');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_LAST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_LAST');
+          data.addColumn('number', 'UserId_');
+          
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.CountId),
+              parseFloat(row.EventTime),
+              parseFloat(row.GroupByAdv),
+              parseFloat(row.GroupBySimple),
+              parseFloat(row.OrderBy_ASC_NULLS_FIRST),
+              parseFloat(row.OrderBy_ASC_NULLS_LAST),
+              parseFloat(row.OrderBy_DESC_NULLS_FIRST),
+              parseFloat(row.OrderBy_DESC_NULLS_LAST),
+              parseFloat(row.UserId),
+            
+            ]);
+          });
+
+          var options = {
+            'legend':'bottom',
+            'title':'Login Event Query Result Timings (in seconds)',
+            'is3D':true,
+            'width':'100%',
+            'height':300,
+            'pointSize': 5,
+            'fontSize': 12
+          }
+
+          var chart = new google.visualization.LineChart($('#Loginquery').get(0));
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
 
   </head>
   <body>
@@ -330,6 +403,7 @@
 
       <h1>Login Events Heartbeat Dashboard (Production Environment)</h1>
       <div id="Logincount" style="width: 100%;"></div><br/>
+      <div id="Loginquery" style="width: 100%;"></div><br/>
       <div id="Loginsuccess" style="width: 100%;"></div><br/>
       </div>
 
