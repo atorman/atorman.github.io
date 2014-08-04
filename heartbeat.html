@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <title>Event Heartbeat Monitor</title>
+
     <!-- Refresh page every 60 seconds-->
 
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="60"/>
     <!-- EXTERNAL LIBS-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://www.google.com/jsapi"></script>
@@ -208,7 +217,7 @@
       // onload callback
       function drawChart() {
 
-        var public_key = 'wpp6OrgLGzCbgpl0AlWd';
+        var public_key = 'q55VQq3j0OtQyEqog5Kl';
 
         // JSONP request
         var jsonData = $.ajax({
@@ -223,13 +232,11 @@
           data.addColumn('number', 'AvgLimitValue');
           data.addColumn('number', 'Count');
           data.addColumn('number', 'CountId');
-          data.addColumn('number', 'EntryPointId_');
-          data.addColumn('number', 'EntryPointName');
-          data.addColumn('number', 'EntryPointType_');
-          data.addColumn('number', 'EventTime_');
+          data.addColumn('number', 'EntryPointId');
+          data.addColumn('number', 'EntryPointType');
+          data.addColumn('number', 'EventTime');
           data.addColumn('number', 'GroupByAdv');
           data.addColumn('number', 'GroupBySimple');
-          data.addColumn('number', 'LimitType');
           data.addColumn('number', 'MaxLimitValue');
           data.addColumn('number', 'MinLimitValue');
           data.addColumn('number', 'OrderBy_ASC_NULLS_FIRST');
@@ -237,7 +244,6 @@
           data.addColumn('number', 'OrderBy_DESC_NULLS_FIRST');
           data.addColumn('number', 'OrderBy_DESC_NULLS_LAST');
           data.addColumn('number', 'UserId_');
-          data.addColumn('number', 'Username');
           
 
           $.each(results, function (i, row) {
@@ -246,21 +252,18 @@
               parseFloat(row.AvgLimitValue),
               parseFloat(row.Count),
               parseFloat(row.CountId),
-              parseFloat(row.EntryPointId_),
-              parseFloat(row.EntryPointName),
-              parseFloat(row.EntryPointType_),
-              parseFloat(row.EventTime_),
+              parseFloat(row.EntryPointId),
+              parseFloat(row.EntryPointType),
+              parseFloat(row.EventTime),
               parseFloat(row.GroupByAdv),
               parseFloat(row.GroupBySimple),
-              parseFloat(row.LimitType),
               parseFloat(row.MaxLimitValue),
               parseFloat(row.MinLimitValue),
               parseFloat(row.OrderBy_ASC_NULLS_FIRST),
               parseFloat(row.OrderBy_ASC_NULLS_LAST),
               parseFloat(row.OrderBy_DESC_NULLS_FIRST),
               parseFloat(row.OrderBy_DESC_NULLS_LAST),
-              parseFloat(row.UserId_),
-              parseFloat(row.Username)
+              parseFloat(row.UserId),
             
             ]);
           });
@@ -272,7 +275,7 @@
             'width':'100%',
             'height':300,
             'pointSize': 5,
-            'fontSize': 10
+            'fontSize': 12
           }
 
           var chart = new google.visualization.LineChart($('#Apexquery').get(0));
@@ -297,14 +300,48 @@
 
   </head>
   <body>
-    <h1>Apex Limits Event Heartbeat Dashboard (Dev Environment)</h1>
-    <div id="Apexcount" style="width: 100%;"></div><br/>
-    <div id="Apexquery" style="width: 100%;"></div><br/>
-    <div id="Apexsuccess" style="width: 100%;"></div><br/>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Event Heartbeat Monitor</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
 
-    <h1>Login Events Heartbeat Dashboard (Production Environment)</h1>
-    <div id="Logincount" style="width: 100%;"></div><br/>
-    <div id="Loginsuccess" style="width: 100%;"></div><br/>
+    <div class="container">
+      <br/>
+      <br/>
+
+      <div class="starter-template">       
+      <h1>Apex Limits Event Heartbeat Dashboard (Dev Environment)</h1>
+      <div id="Apexcount" style="width: 100%;"></div><br/>
+      <div id="Apexquery" style="width: 100%;"></div><br/>
+      <div id="Apexsuccess" style="width: 100%;"></div><br/>
+
+      <h1>Login Events Heartbeat Dashboard (Production Environment)</h1>
+      <div id="Logincount" style="width: 100%;"></div><br/>
+      <div id="Loginsuccess" style="width: 100%;"></div><br/>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
   </body>
 </html>
