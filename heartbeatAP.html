@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <title>Login Event Heartbeat Monitor AP</title>
+
+    <!-- Refresh page every 90 seconds-->
+
+    <meta http-equiv="refresh" content="90"/>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <!-- Count of Login events -->
+
+    <!-- Count of events -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'EJJMxNaOZGfYLabmbddm';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Record Count');
+          //data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.recordCount),
+              //parseFloat(row.success)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#Logincount').get(0));
+
+          chart.draw(data, {
+            title: 'Login Events Count'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+    <!-- Login Event (IdForensics) Query Timings -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'EJJMxNaOZGfYLabmbddm';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'CountId');
+          data.addColumn('number', 'EventTime');
+          data.addColumn('number', 'GroupByAdv');
+          data.addColumn('number', 'GroupBySimple');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_LAST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_LAST');
+          data.addColumn('number', 'UserId');
+          
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.CountId),
+              parseFloat(row.EventTime),
+              parseFloat(row.GroupByAdv),
+              parseFloat(row.GroupBySimple),
+              parseFloat(row.OrderBy_ASC_NULLS_FIRST),
+              parseFloat(row.OrderBy_ASC_NULLS_LAST),
+              parseFloat(row.OrderBy_DESC_NULLS_FIRST),
+              parseFloat(row.OrderBy_DESC_NULLS_LAST),
+              parseFloat(row.UserId),
+            
+            ]);
+          });
+
+          var options = {
+            'legend':'bottom',
+            'title':'Login Event Query Result Timings (in seconds)',
+            'is3D':true,
+            'width':'100%',
+            'height':300,
+            'pointSize': 5,
+            'fontSize': 12
+          }
+
+          var chart = new google.visualization.LineChart($('#Loginquery').get(0));
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+    <!-- Success of events -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'EJJMxNaOZGfYLabmbddm';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.success),
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#Loginsuccess').get(0));
+
+          chart.draw(data, {
+            title: 'Login Events Success'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Event Heartbeat Monitor</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <br/>
+      <br/>
+
+      <div class="starter-template">       
+      <h1>Login Events Heartbeat Dashboard (AP Production Environment)</h1>
+      <div id="Logincount" style="width: 100%;"></div><br/>
+      <div id="Loginquery" style="width: 100%;"></div><br/>
+      <div id="Loginsuccess" style="width: 100%;"></div><br/>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
