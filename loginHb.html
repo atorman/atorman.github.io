@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <title>Login Heartbeat Monitor</title>
+
+    <!-- Refresh page every 90 seconds-->
+
+    <meta http-equiv="refresh" content="90"/>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <!-- Count of Login events -->
+
+    <!-- Count of events -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'NJl2QZ6xWLfG01E4pKRR';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Record Count');
+          //data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.lerecordcount),
+              //parseFloat(row.success)
+            ]);
+          });
+
+          var options = {
+            'legend':'bottom',
+            'title':'Login Event Count',
+            'is3D':true,
+            'width':'100%',
+            'height':300,
+            'pointSize': 5,
+            'fontSize': 14
+          }
+
+          var chart = new google.visualization.LineChart($('#LoginEventCount').get(0));
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+    <!-- Login Event (Login Forensics) Query Timings -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'NJl2QZ6xWLfG01E4pKRR';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'CountId');
+          data.addColumn('number', 'EventTime');
+          data.addColumn('number', 'GroupByAdv');
+          data.addColumn('number', 'GroupBySimple');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_LAST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_LAST');
+          data.addColumn('number', 'UserId');
+          
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.lecountid),
+              parseFloat(row.leeventtime),
+              parseFloat(row.legroupbyadv),
+              parseFloat(row.legroupbysimple),
+              parseFloat(row.leorderby_asc_nulls_first),
+              parseFloat(row.leorderby_asc_nulls_last),
+              parseFloat(row.leorderby_desc_nulls_first),
+              parseFloat(row.leorderby_desc_nulls_last),
+              parseFloat(row.leuserid),
+            
+            ]);
+          });
+
+          var options = {
+            'legend':'bottom',
+            'title':'Login Event Query Result Timings (in seconds)',
+            'is3D':true,
+            'width':'100%',
+            'height':300,
+            'pointSize': 5,
+            'fontSize': 14
+          }
+
+          var chart = new google.visualization.LineChart($('#LoginEventQuery').get(0));
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+<!-- Count of Login history -->
+
+    <!-- Count of history -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'NJl2QZ6xWLfG01E4pKRR';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Record Count');
+          //data.addColumn('number', 'Success');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.lhrecordcount),
+              //parseFloat(row.success)
+            ]);
+          });
+
+          var options = {
+            'legend':'bottom',
+            'title':'Login History Count',
+            'is3D':true,
+            'width':'100%',
+            'height':300,
+            'pointSize': 5,
+            'fontSize': 14
+          }
+
+          var chart = new google.visualization.LineChart($('#LoginHistoryCount').get(0));
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+    <!-- Login Event (Login Forensics) Query Timings -->
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        var public_key = 'NJl2QZ6xWLfG01E4pKRR';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'CountId');
+          data.addColumn('number', 'EventTime');
+          data.addColumn('number', 'GroupByAdv');
+          data.addColumn('number', 'GroupBySimple');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_ASC_NULLS_LAST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_FIRST');
+          data.addColumn('number', 'OrderBy_DESC_NULLS_LAST');
+          data.addColumn('number', 'UserId');
+          
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.lhcountid),
+              parseFloat(row.lheventtime),
+              parseFloat(row.lhgroupbyadv),
+              parseFloat(row.lhgroupbysimple),
+              parseFloat(row.lhorderby_asc_nulls_first),
+              parseFloat(row.lhorderby_asc_nulls_last),
+              parseFloat(row.lhorderby_desc_nulls_first),
+              parseFloat(row.lhorderby_desc_nulls_last),
+              parseFloat(row.lhuserid),
+            
+            ]);
+          });
+
+          var options = {
+            'legend':'bottom',
+            'title':'Login History Query Result Timings (in seconds)',
+            'is3D':true,
+            'width':'100%',
+            'height':300,
+            'pointSize': 5,
+            'fontSize': 14
+          }
+
+          var chart = new google.visualization.LineChart($('#LoginHistoryQuery').get(0));
+
+          chart.draw(data, options);
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Event Heartbeat Monitor</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <br/>
+      <br/>
+
+      <div class="starter-template">       
+      <h1>Login Heartbeat Dashboard</h1>
+      <div id="LoginEventCount" style="width: 100%;"></div><br/>
+      <div id="LoginHistoryCount" style="width: 100%;"></div><br/>
+      <hr/>
+      <div id="LoginEventQuery" style="width: 100%;"></div><br/>
+      <div id="LoginHistoryQuery" style="width: 100%;"></div><br/>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
